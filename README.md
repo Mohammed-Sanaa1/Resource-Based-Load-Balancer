@@ -98,13 +98,6 @@ The project was benchmarked using:
 
 ---
 
-## Team Members
-1. Alaa Saad
-2. Mohammed Saeed
-3. Hamza Alshaya
-
----
-
 ## References
 - [Square Wave](https://www.wikiwand.com/en/articles/Square_wave)
 - [Sine Wave](https://www.wikiwand.com/en/articles/Sine_wave)
