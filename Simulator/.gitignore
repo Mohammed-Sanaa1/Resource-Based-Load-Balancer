@@ -1,0 +1,3 @@
+#ignore python cache files and binaries
+__pycache__/
+*.pyc

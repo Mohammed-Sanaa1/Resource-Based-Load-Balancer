@@ -1,0 +1,5 @@
+__pycache__
+
+*.csv
+output_csv
+output_fig

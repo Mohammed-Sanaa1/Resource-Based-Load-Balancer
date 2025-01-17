@@ -1,0 +1,85 @@
+1. Basic Functionality Test:
+Test Case: Check if requests are distributed evenly in a round-robin fashion without exceeding the server's capacity.
+
+Input:
+Servers: Server1(10), Server2(15), Server3(20)
+Requests:
+R1(5)
+R2(10)
+R3(15)
+R4(3)
+
+Expected Output:
+R1 -> Server1
+R2 -> Server2
+R3 -> Server3
+R4 -> Server1 (enough capacity to handle)
+=========================================
+2. Overloaded Server Test:
+Test Case: Test if the load balancer skips a server that cannot handle the current request and moves to the next available server.
+
+Input:
+Servers: Server1(10), Server2(15), Server3(20)
+Requests:
+R1(5)
+R2(5)
+R3(5)
+R4(15)
+R5(10)
+
+Expected Output:
+R1 -> Server1
+R2 -> Server2
+R3 -> Server3
+R4 -> Server3 (not enough capacity on Server1 and Server2)
+R5 -> Server2 (not enough capacity on Server1)
+=========================================
+3. All Servers Overloaded Test:
+Test Case: Validate how the system responds when all servers are overloaded.
+
+Input:
+Servers: Server1 (Capacity 5), Server2 (Capacity 5), Server3 (Capacity 5)
+Requests:
+R1 (Weight 6) (Larger than any single server capacity)
+Expected Output:
+System should output a message letting the user know that no server can handle the request due to capacithy overload.
+=========================================
+4. Server Load Release Test:
+Test Case: Ensure that after a server handles a request, it releases the load correctly, making space for new requests.
+
+Input:
+Servers: Server1 (Capacity 5), Server2 (Capacity 5)
+Requests:
+Request1 (Weight 5)
+Request2 (Weight 5)
+We will simulate a delay in requests to give the servers time to release the load, then send two more requests to those servers
+Request1 (Weight 5)
+Request2 (Weight 5)
+Expected output:
+After releasing the loads successfully, all servers should be able to handle all the requests successfully
+=========================================
+5. Edge Case: No Servers Available
+Test Case: Check how the system behaves when no servers are available at all.
+Input:
+Servers: []
+Requests:
+Request1 (Weight 5)
+Expected Output:
+System should output a message indicating no servers available for handling the requests
+=========================================
+6. Edge Case: Rapid Fire Requests
+Test Case: Simulate rapid requests to ensure that the balancer can handle high-frequency traffic without breaking.
+Input:
+Servers: Server1 (Capacity 50), Server2 (Capacity 50)
+Requests: Send 100 requests with random weights between 1 and 10.
+Expected Output:
+Requests should be distributed evenly across servers, none exceeding the capacity.
+Logs should show servers handling the load and releasing it after processing.
+=========================================
+7. Edge Case: Uneven Server Capacities
+Test Case: Ensure that servers with uneven capacities distribute requests based on their available load.
+Input:
+Servers: Server1 (Capacity 5), Server2 (Capacity 15), Server3 (Capacity 30)
+Requests:
+10 requests with a weight of 3.
+Expected Output:
